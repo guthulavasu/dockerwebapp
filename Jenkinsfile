@@ -20,6 +20,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn clean package'
+                sh 'cp -r target/* Docker-app/'
             }
         }
 
@@ -32,6 +33,13 @@ pipeline {
                         -Dsonar.projectKey=myproject
                     '''
                 }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t appimage Docker-app'
+                sh 'docker build -t dbimage Docker-db'
             }
         }
     }
