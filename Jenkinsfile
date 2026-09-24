@@ -42,5 +42,11 @@ pipeline {
                 sh 'docker build -t dbimage Docker-db'
             }
         }
+        stage('trivy-stage') {
+            steps {
+                sh 'trivy image appimage'
+                sh 'trivy image dbimage'
+            }
+        }
     }
 }
