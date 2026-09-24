@@ -48,5 +48,11 @@ pipeline {
                 sh 'trivy image dbimage'
             }
         }
+        stage ("Tag") {
+            steps {
+                sh 'docker tag appimage guthulavasuu/mynewapp:appimage'
+                sh 'docker tag dbimage guthulavasuu/mynewapp:dbimage'
+            }
+        }
     }
 }
