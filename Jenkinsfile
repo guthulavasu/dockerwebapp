@@ -20,7 +20,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn clean package'
-                sh 'cp -r target/* Docker-app/'
+                sh 'cp -r target Docker-app/'
             }
         }
 
