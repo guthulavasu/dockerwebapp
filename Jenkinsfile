@@ -1,4 +1,3 @@
-
 pipeline {
     agent {
         node {
@@ -26,7 +25,13 @@ pipeline {
 
         stage('SonarQube') {
             steps {
-                echo 'SonarQube stage'
+                withSonarQubeEnv('mysonar') {
+                    sh '''
+                        mvn verify \
+                        org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+                        -Dsonar.projectKey=myproject
+                    '''
+                }
             }
         }
     }
